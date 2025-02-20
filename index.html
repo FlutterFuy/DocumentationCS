@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Сайдбар */
+        .sidebar {
+            background-color: #2d2d2d;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            width: 300px;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            margin-bottom: 30px;
+        }
+
+        .sidebar h2 {
+            color: #569cd6;
+            border-bottom: 2px solid #3d3d3d;
+            padding-bottom: 10px;
+        }
+
+        .menu {
+            list-style: none;
+        }
+
+        .menu-item {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .menu-item:hover {
+            background-color: #3d3d3d;
+        }
+
+        .menu-item.active {
+            background-color: #3d3d3d;
+            border-left: 4px solid #569cd6;
+        }
+
+        /* Основной контент */
+        .content {
+            padding: 40px;
+            margin-left: 300px;
+            max-width: 800px;
+        }
+
+        .section {
+            display: none;
+            margin-bottom: 40px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h1 {
+            color: #569cd6;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #4ec9b0;
+            margin: 20px 0;
+        }
+
+        code {
+            background-color: #2d2d2d;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Consolas', monospace;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.9em;
+        }
+
+        a {
+            color: #569cd6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>C# Documentation</h2>
+            </div>
+            <ul class="menu">
+                <li class="menu-item active" data-section="intro">Введение</li>
+                <li class="menu-item" data-section="syntax">Синтаксис</li>
+                <li class="menu-item" data-section="oop">ООП</li>
+                <li class="menu-item" data-section="async">Асинхронность</li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <!-- Раздел Введение -->
+            <section class="section active" id="intro">
+                <h1>Введение в C#</h1>
+                <p>C# — современный объектно-ориентированный язык программирования, разработанный Microsoft.</p>
+                
+                <h2>Особенности языка</h2>
+                <ul>
+                    <li>Статическая типизация</li>
+                    <li>Поддержка ООП</li>
+                    <li>Кроссплатформенность (.NET Core)</li>
+                    <li>Автоматическое управление памятью</li>
+                </ul>
+            </section>
+
+            <!-- Раздел Синтаксис -->
+            <section class="section" id="syntax">
+                <h1>Базовый синтаксис</h1>
+                
+                <h2>Hello World</h2>
+                <pre><code>using System;
+
+class Program {
+    static void Main() {
+        Console.WriteLine("Hello World!");
+    }
+}</code></pre>
+
+                <h2>Переменные</h2>
+                <pre><code>int number = 10;
+string text = "C#";
+var implicitType = 3.14;</code></pre>
+            </section>
+
+            <!-- Раздел ООП -->
+            <section class="section" id="oop">
+                <h1>Объектно-ориентированное программирование</h1>
+                
+                <h2>Класс и объект</h2>
+                <pre><code>public class Car {
+    public string Model { get; set; }
+    
+    public void StartEngine() {
+        Console.WriteLine("Engine started!");
+    }
+}
+
+// Использование
+var myCar = new Car();
+myCar.Model = "Tesla Model S";
+myCar.StartEngine();</code></pre>
+            </section>
+
+            <!-- Раздел Асинхронность -->
+            <section class="section" id="async">
+                <h1>Асинхронное программирование</h1>
+                
+                <h2>async/await</h2>
+                <pre><code>public async Task&lt;string&gt; GetDataAsync() {
+    using var client = new HttpClient();
+    return await client.GetStringAsync("https://api.example.com/data");
+}
+
+// Использование
+var result = await GetDataAsync();
+Console.WriteLine(result);</code></pre>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const sections = document.querySelectorAll('.section');
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Удаляем активные классы
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    sections.forEach(section => section.classList.remove('active'));
+
+                    // Добавляем активные классы
+                    item.classList.add('active');
+                    const sectionId = item.dataset.section;
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
