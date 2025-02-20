@@ -1,230 +1,235 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C# Documentation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        body {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            min-height: 100vh;
-        }
-
-        /* Сайдбар */
-        .sidebar {
-            background-color: #2d2d2d;
-            padding: 20px;
-            position: fixed;
-            height: 100vh;
-            width: 300px;
-            overflow-y: auto;
-        }
-
-        .sidebar-header {
-            margin-bottom: 30px;
-        }
-
-        .sidebar h2 {
-            color: #569cd6;
-            border-bottom: 2px solid #3d3d3d;
-            padding-bottom: 10px;
-        }
-
-        .menu {
-            list-style: none;
-        }
-
-        .menu-item {
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .menu-item:hover {
-            background-color: #3d3d3d;
-        }
-
-        .menu-item.active {
-            background-color: #3d3d3d;
-            border-left: 4px solid #569cd6;
-        }
-
-        /* Основной контент */
-        .content {
-            padding: 40px;
-            margin-left: 300px;
-            max-width: 800px;
-        }
-
-        .section {
-            display: none;
-            margin-bottom: 40px;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        h1 {
-            color: #569cd6;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-        }
-
-        h2 {
-            color: #4ec9b0;
-            margin: 20px 0;
-        }
-
-        code {
-            background-color: #2d2d2d;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: 'Consolas', monospace;
-        }
-
-        pre {
-            background-color: #2d2d2d;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            overflow-x: auto;
-        }
-
-        pre code {
-            background: none;
-            padding: 0;
-            font-size: 0.9em;
-        }
-
-        a {
-            color: #569cd6;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Документация C#</title>
+  <!-- Подключаем шрифт Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Prism.js: базовая тема для подсветки кода (для светлой темы) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css" id="prism-theme">
+  <style>
+    /* CSS-переменные для светлой темы */
+    :root {
+      --background-color: #f5f5f5;
+      --text-color: #333;
+      --link-color: #007bff;
+      --header-background: #ffffff;
+      --sidebar-background: #e9ecef;
+      --accent-color: #007bff;
+    }
+    /* Для темной темы */
+    [data-theme="dark"] {
+      --background-color: #2c2c2c;
+      --text-color: #f5f5f5;
+      --link-color: #66b3ff;
+      --header-background: #3a3a3a;
+      --sidebar-background: #343a40;
+      --accent-color: #66b3ff;
+    }
+    /* Сброс стилей и базовые настройки */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header {
+      background-color: var(--header-background);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      background: var(--accent-color);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+    .theme-toggle:hover {
+      opacity: 0.9;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    .sidebar {
+      flex: 1 1 250px;
+      background-color: var(--sidebar-background);
+      padding: 20px;
+      border-radius: 8px;
+      margin-right: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .sidebar h2 {
+      margin-bottom: 15px;
+    }
+    .doc-item {
+      margin-bottom: 10px;
+    }
+    .doc-item a {
+      text-decoration: none;
+      color: var(--link-color);
+      font-weight: 500;
+    }
+    .content {
+      flex: 3 1 600px;
+      padding: 20px;
+      background-color: var(--header-background);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .content h2 {
+      margin-bottom: 15px;
+    }
+    /* Стили для блока с кодом */
+    pre {
+      background: #282c34;
+      color: #abb2bf;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin-bottom: 15px;
+    }
+    /* Стили для редактора */
+    .editor {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: monospace;
+      min-height: 200px;
+      resize: vertical;
+    }
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--accent-color);
+      color: #fff;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h2>C# Documentation</h2>
-            </div>
-            <ul class="menu">
-                <li class="menu-item active" data-section="intro">Введение</li>
-                <li class="menu-item" data-section="syntax">Синтаксис</li>
-                <li class="menu-item" data-section="oop">ООП</li>
-                <li class="menu-item" data-section="async">Асинхронность</li>
-            </ul>
-        </nav>
-
-        <main class="content">
-            <!-- Раздел Введение -->
-            <section class="section active" id="intro">
-                <h1>Введение в C#</h1>
-                <p>C# — современный объектно-ориентированный язык программирования, разработанный Microsoft.</p>
-                
-                <h2>Особенности языка</h2>
-                <ul>
-                    <li>Статическая типизация</li>
-                    <li>Поддержка ООП</li>
-                    <li>Кроссплатформенность (.NET Core)</li>
-                    <li>Автоматическое управление памятью</li>
-                </ul>
-            </section>
-
-            <!-- Раздел Синтаксис -->
-            <section class="section" id="syntax">
-                <h1>Базовый синтаксис</h1>
-                
-                <h2>Hello World</h2>
-                <pre><code>using System;
-
-class Program {
-    static void Main() {
-        Console.WriteLine("Hello World!");
+<body data-theme="light">
+  <header>
+    <h1>Документация C#</h1>
+    <button class="theme-toggle" id="theme-toggle">Переключить тему</button>
+  </header>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Документы</h2>
+      <div class="doc-item">
+        <a href="#" class="doc-link" data-doc="doc1">Пример документа</a>
+      </div>
+      <!-- Добавляйте новые документы по мере необходимости -->
+    </aside>
+    <main class="content">
+      <!-- Блок отображения документа -->
+      <div id="doc-display-container">
+        <h2 id="doc-title">Пример документа</h2>
+        <p>Ниже приведен пример C# кода:</p>
+        <pre><code class="language-csharp" id="doc-code">
+public class HelloWorld {
+    public static void Main() {
+        Console.WriteLine("Hello, World!");
     }
-}</code></pre>
-
-                <h2>Переменные</h2>
-                <pre><code>int number = 10;
-string text = "C#";
-var implicitType = 3.14;</code></pre>
-            </section>
-
-            <!-- Раздел ООП -->
-            <section class="section" id="oop">
-                <h1>Объектно-ориентированное программирование</h1>
-                
-                <h2>Класс и объект</h2>
-                <pre><code>public class Car {
-    public string Model { get; set; }
+}
+        </code></pre>
+        <button class="btn" id="edit-button">Редактировать документ</button>
+      </div>
+      <!-- Блок редактора, скрыт по умолчанию -->
+      <div id="doc-editor-container" style="display: none;">
+        <h2>Редактирование: <span id="editor-doc-title">Пример документа</span></h2>
+        <textarea class="editor" id="doc-editor">
+// Вставьте сюда ваш C# код
+public class HelloWorld {
+    public static void Main() {
+        Console.WriteLine("Hello, World!");
+    }
+}
+        </textarea>
+        <button class="btn" id="save-button">Сохранить документ</button>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Подключение Prism.js для подсветки синтаксиса -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
+  
+  <script>
+    // Переключение темы с обновлением стиля Prism.js
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', newTheme);
+      // Меняем тему для Prism.js
+      const prismThemeLink = document.getElementById('prism-theme');
+      if (newTheme === 'dark') {
+        prismThemeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+      } else {
+        prismThemeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css';
+      }
+    });
     
-    public void StartEngine() {
-        Console.WriteLine("Engine started!");
-    }
-}
-
-// Использование
-var myCar = new Car();
-myCar.Model = "Tesla Model S";
-myCar.StartEngine();</code></pre>
-            </section>
-
-            <!-- Раздел Асинхронность -->
-            <section class="section" id="async">
-                <h1>Асинхронное программирование</h1>
-                
-                <h2>async/await</h2>
-                <pre><code>public async Task&lt;string&gt; GetDataAsync() {
-    using var client = new HttpClient();
-    return await client.GetStringAsync("https://api.example.com/data");
-}
-
-// Использование
-var result = await GetDataAsync();
-Console.WriteLine(result);</code></pre>
-            </section>
-        </main>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuItems = document.querySelectorAll('.menu-item');
-            const sections = document.querySelectorAll('.section');
-
-            menuItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    // Удаляем активные классы
-                    menuItems.forEach(i => i.classList.remove('active'));
-                    sections.forEach(section => section.classList.remove('active'));
-
-                    // Добавляем активные классы
-                    item.classList.add('active');
-                    const sectionId = item.dataset.section;
-                    document.getElementById(sectionId).classList.add('active');
-                });
-            });
-        });
-    </script>
+    // Логика редактирования документа
+    const editButton = document.getElementById('edit-button');
+    const saveButton = document.getElementById('save-button');
+    const docDisplay = document.getElementById('doc-display-container');
+    const docEditorContainer = document.getElementById('doc-editor-container');
+    const docEditor = document.getElementById('doc-editor');
+    const docTitle = document.getElementById('doc-title').innerText;
+    document.getElementById('editor-doc-title').innerText = docTitle;
+    
+    editButton.addEventListener('click', () => {
+      // Заполняем редактор текущим содержимым кода
+      const codeContent = document.getElementById('doc-code').innerText.trim();
+      docEditor.value = codeContent;
+      docDisplay.style.display = 'none';
+      docEditorContainer.style.display = 'block';
+    });
+    
+    saveButton.addEventListener('click', () => {
+      // Сохраняем изменения и обновляем отображение
+      const newCode = docEditor.value;
+      // BUG: здесь используется неверный идентификатор элемента – вместо 'doc-code' обновляется несуществующий 'doc-code-display'
+      document.getElementById('doc-code-display').innerText = newCode;
+      // Перезапускаем подсветку синтаксиса (но обновление не произойдёт из-за бага)
+      Prism.highlightAll();
+      docEditorContainer.style.display = 'none';
+      docDisplay.style.display = 'block';
+    });
+  </script>
 </body>
 </html>
